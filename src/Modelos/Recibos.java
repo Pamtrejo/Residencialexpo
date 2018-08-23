@@ -71,6 +71,7 @@ public class Recibos {
         this.IdRecibos = IdRecibos;
         this.IdPago = IdPago;
         this.Descripcion = Descripcion;
+        this.Monto = Monto;
     }
     
     private int IdRecibos;

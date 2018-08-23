@@ -115,7 +115,7 @@ public class DALRecibos extends Conexion{
             
             try {
                 
-                String sql = "SELECT * FROM vw_Recibos WHERE IdRecibo = ?";
+                String sql = "SELECT * FROM vw_Recibos WHERE IdRecibos = ?";
                 PreparedStatement cmd = cn.prepareStatement(sql);
                 cmd.setInt(1, Id);
                 

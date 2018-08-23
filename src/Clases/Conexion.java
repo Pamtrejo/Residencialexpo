@@ -4,14 +4,22 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
 
+
+
 public class Conexion {
     static  Connection cn = null;
+    
+    public Conexion(){
+    
+        this.conectar();
+    }
+    
     public static Connection conectar(){
        
         try{
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            cn = DriverManager.getConnection("jdbc:sqlserver://LAPTOP-PVFQ2RI8\\SQLEXPRESS;"
-                    + "databaseName=ProjectResidencial;integratedSecurity=true;");
+            cn = DriverManager.getConnection("jdbc:sqlserver://LAPTOP;"
+                    + "databaseName=ProjectResidencial2;integratedSecurity=true;");
             System.out.println("Conexion Exitosa");
         }
         catch(Exception ex){
@@ -20,3 +28,6 @@ public class Conexion {
         return cn;
     }
 }
+
+
+

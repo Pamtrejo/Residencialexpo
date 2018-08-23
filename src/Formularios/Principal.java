@@ -32,6 +32,10 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JComboBox;
 import Modelos.*;
 import java.awt.Component;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 /**
  *
  * @author panay
@@ -66,6 +70,25 @@ public class Principal extends javax.swing.JFrame {
         DALVivienda viviendas = new DALVivienda();
         DALPagos pagos = new DALPagos();
         DALDueno dueno = new DALDueno();
+        
+        
+        
+        jTextField16.addKeyListener(new KeyAdapter()
+{
+    @Override
+    public void keyTyped(KeyEvent keyEvent)
+    {
+       String valor = jTextField16.getText().trim();
+        char c = keyEvent.getKeyChar();
+if(c=='0' || c=='1' || c=='2' || c=='3' || c=='4' || c=='5' || c=='6' || c=='7' || c=='8' || c=='9' || c=='.'){
+    if(jTextField16.getText().trim().contains(".") && c=='.'){
+       keyEvent.consume();
+    }    
+    }else{
+keyEvent.consume();
+}
+    }
+});
     }
     
     public void llenarTabla(){
@@ -118,6 +141,18 @@ public class Principal extends javax.swing.JFrame {
     }
     
     
+    public boolean ConfirmarIngreso(String mensaje, String Titulo){
+    boolean seConfirma = true;
+    if (JOptionPane.showConfirmDialog(null, mensaje, Titulo,
+        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+    // yes option
+    } else {
+    seConfirma = false;
+    }
+        return seConfirma;
+    }
+    
+    
     
     
     
@@ -146,37 +181,16 @@ public class Principal extends javax.swing.JFrame {
         jtxtaDescrip = new javax.swing.JTextArea();
         jbtnGuardar1 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jbtnMinimizar = new javax.swing.JButton();
-        jbtnCerrar = new javax.swing.JButton();
-        jpControlPanel = new javax.swing.JPanel();
-        jControlpanel = new javax.swing.JLabel();
-        jblRegistro = new javax.swing.JLabel();
-        jblVisitas = new javax.swing.JLabel();
-        jblCroquis = new javax.swing.JLabel();
-        jblFactura = new javax.swing.JLabel();
-        jblMembresia = new javax.swing.JLabel();
-        jblResidente = new javax.swing.JLabel();
-        jblVivienda = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jpNuevaFactura = new javax.swing.JPanel();
-        jLabel49 = new javax.swing.JLabel();
-        jComboBox7 = new javax.swing.JComboBox<>();
-        jLabel50 = new javax.swing.JLabel();
-        jLabel53 = new javax.swing.JLabel();
-        jLabel57 = new javax.swing.JLabel();
-        jLabel58 = new javax.swing.JLabel();
-        jLabel59 = new javax.swing.JLabel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea3 = new javax.swing.JTextArea();
-        jTextField15 = new javax.swing.JTextField();
-        jTextField16 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
-        jLabel60 = new javax.swing.JLabel();
+        jpMembresia = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jtxtTipoMembresia = new javax.swing.JTextField();
+        jtxtTipo = new javax.swing.JTextField();
+        jtxtFactor = new javax.swing.JTextField();
+        jtxtValor = new javax.swing.JTextField();
         jpVivienda = new javax.swing.JPanel();
         jLabel32 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
@@ -189,15 +203,6 @@ public class Principal extends javax.swing.JFrame {
         jComboBox4 = new javax.swing.JComboBox<>();
         jTextField10 = new javax.swing.JTextField();
         jTextField11 = new javax.swing.JTextField();
-        jpRegistro = new javax.swing.JPanel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
-        jLabel44 = new javax.swing.JLabel();
-        jtxtNombreUsu = new javax.swing.JTextField();
-        jtxtContrasena = new javax.swing.JPasswordField();
-        jComboBox6 = new javax.swing.JComboBox<>();
-        jbtnGuardarUsuario = new javax.swing.JButton();
         jpRegistrar = new javax.swing.JPanel();
         jtxtNomVisitante = new javax.swing.JTextField();
         jtxtNomResidente = new javax.swing.JTextField();
@@ -219,14 +224,6 @@ public class Principal extends javax.swing.JFrame {
         jbtnEliminarVisitas = new javax.swing.JButton();
         jbtnModificarVisitas = new javax.swing.JButton();
         jbtnConsultarVisitas = new javax.swing.JButton();
-        jpFactura = new javax.swing.JPanel();
-        jLabel21 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jbtnBuscar = new javax.swing.JButton();
-        jbtnAñadir = new javax.swing.JButton();
-        jbtnModificar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        FacturasTable = new javax.swing.JTable();
         jpResidentes = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
@@ -246,20 +243,58 @@ public class Principal extends javax.swing.JFrame {
         jbtnConsultarResidente = new javax.swing.JButton();
         jLabel47 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
-        jpMembresia = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jtxtTipoMembresia = new javax.swing.JTextField();
-        jtxtTipo = new javax.swing.JTextField();
-        jtxtFactor = new javax.swing.JTextField();
-        jtxtValor = new javax.swing.JTextField();
+        jpRegistro = new javax.swing.JPanel();
+        jLabel41 = new javax.swing.JLabel();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel43 = new javax.swing.JLabel();
+        jLabel44 = new javax.swing.JLabel();
+        jtxtNombreUsu = new javax.swing.JTextField();
+        jtxtContrasena = new javax.swing.JPasswordField();
+        jComboBox6 = new javax.swing.JComboBox<>();
+        jbtnGuardarUsuario = new javax.swing.JButton();
         jpCroquis = new javax.swing.JPanel();
         jbtnAgregar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
+        jbtnMinimizar = new javax.swing.JButton();
+        jbtnCerrar = new javax.swing.JButton();
+        jpControlPanel = new javax.swing.JPanel();
+        jControlpanel = new javax.swing.JLabel();
+        jblRegistro = new javax.swing.JLabel();
+        jblVisitas = new javax.swing.JLabel();
+        jblCroquis = new javax.swing.JLabel();
+        jblFactura = new javax.swing.JLabel();
+        jblMembresia = new javax.swing.JLabel();
+        jblResidente = new javax.swing.JLabel();
+        jblVivienda = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jpFactura = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        jTextField7 = new javax.swing.JTextField();
+        jbtnBuscar = new javax.swing.JButton();
+        jbtnAñadir = new javax.swing.JButton();
+        jbtnModificar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        FacturasTable = new javax.swing.JTable();
+        jpNuevaFactura = new javax.swing.JPanel();
+        jLabel49 = new javax.swing.JLabel();
+        jComboBox7 = new javax.swing.JComboBox<>();
+        jLabel50 = new javax.swing.JLabel();
+        jLabel53 = new javax.swing.JLabel();
+        jLabel57 = new javax.swing.JLabel();
+        jLabel58 = new javax.swing.JLabel();
+        jLabel59 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        jTextField15 = new javax.swing.JTextField();
+        jTextField16 = new javax.swing.JTextField();
+        jTextField17 = new javax.swing.JTextField();
+        jLabel60 = new javax.swing.JLabel();
         jpFondo = new javax.swing.JPanel();
         jblFondo = new javax.swing.JLabel();
 
@@ -364,202 +399,57 @@ public class Principal extends javax.swing.JFrame {
         jpNueva.add(jbtnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 450, 190, 30));
         jpNueva.add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(1000, 500));
-        setUndecorated(true);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jpMembresia.setOpaque(false);
+        jpMembresia.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jbtnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/minimizar (4).png"))); // NOI18N
-        jbtnMinimizar.setBorderPainted(false);
-        jbtnMinimizar.setContentAreaFilled(false);
-        jbtnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jbtnMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jbtnMinimizarMouseClicked(evt);
-            }
-        });
-        getContentPane().add(jbtnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 0, 40, 40));
+        jLabel22.setFont(new java.awt.Font("Bodoni MT Black", 0, 48)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel22.setText("MEMBRESIA");
+        jpMembresia.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, -1, 50));
 
-        jbtnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/boton-cerrar (1).png"))); // NOI18N
-        jbtnCerrar.setBorderPainted(false);
-        jbtnCerrar.setContentAreaFilled(false);
-        jbtnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jbtnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jbtnCerrarMouseClicked(evt);
-            }
-        });
-        getContentPane().add(jbtnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 0, 40, 40));
+        jLabel26.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel26.setText("Tipo de membresia");
+        jpMembresia.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 50));
 
-        jpControlPanel.setBackground(new java.awt.Color(153, 153, 153));
-        jpControlPanel.setPreferredSize(new java.awt.Dimension(190, 500));
-        jpControlPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel23.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel23.setText("Tipo");
+        jpMembresia.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, 50));
 
-        jControlpanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/menu (1).png"))); // NOI18N
-        jControlpanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jControlpanelMouseClicked(evt);
-            }
-        });
-        jpControlPanel.add(jControlpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
+        jLabel24.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel24.setText("Factor");
+        jpMembresia.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, 50));
 
-        jblRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/usuario (8).png"))); // NOI18N
-        jblRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jblRegistroMouseClicked(evt);
-            }
-        });
-        jpControlPanel.add(jblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 40, -1));
+        jLabel25.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel25.setText("Valor");
+        jpMembresia.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, -1, 50));
 
-        jblVisitas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/factura-aprobada.png"))); // NOI18N
-        jblVisitas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jblVisitasMouseClicked(evt);
-            }
-        });
-        jpControlPanel.add(jblVisitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 40, 40));
+        jtxtTipoMembresia.setBackground(new java.awt.Color(102, 102, 102));
+        jtxtTipoMembresia.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        jtxtTipoMembresia.setForeground(new java.awt.Color(255, 255, 255));
+        jtxtTipoMembresia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
+        jpMembresia.add(jtxtTipoMembresia, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 500, 40));
 
-        jblCroquis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/mapa (1).png"))); // NOI18N
-        jblCroquis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jblCroquisMouseClicked(evt);
-            }
-        });
-        jpControlPanel.add(jblCroquis, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 40, 40));
+        jtxtTipo.setBackground(new java.awt.Color(102, 102, 102));
+        jtxtTipo.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        jtxtTipo.setForeground(new java.awt.Color(255, 255, 255));
+        jtxtTipo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
+        jpMembresia.add(jtxtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 500, 40));
 
-        jblFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/factura (1).png"))); // NOI18N
-        jblFactura.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jblFacturaMouseClicked(evt);
-            }
-        });
-        jpControlPanel.add(jblFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 40, 50));
+        jtxtFactor.setBackground(new java.awt.Color(102, 102, 102));
+        jtxtFactor.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        jtxtFactor.setForeground(new java.awt.Color(255, 255, 255));
+        jtxtFactor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
+        jpMembresia.add(jtxtFactor, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 500, 40));
 
-        jblMembresia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/tarjeta-de-visita-de-un-hombre-con-informacion-de-contacto.png"))); // NOI18N
-        jblMembresia.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jblMembresiaMouseClicked(evt);
-            }
-        });
-        jpControlPanel.add(jblMembresia, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 40, 40));
-
-        jblResidente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/grupo-de-usuarios.png"))); // NOI18N
-        jblResidente.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jblResidenteMouseClicked(evt);
-            }
-        });
-        jpControlPanel.add(jblResidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 40, 40));
-
-        jblVivienda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/interfaz-de-hogar.png"))); // NOI18N
-        jblVivienda.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jblViviendaMouseClicked(evt);
-            }
-        });
-        jpControlPanel.add(jblVivienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 40, 40));
-
-        jLabel5.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel5.setText("Registrar visita");
-        jpControlPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 150, 40));
-
-        jLabel6.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel6.setText("Croquis");
-        jpControlPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 160, 40));
-
-        jLabel7.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel7.setText("Factura");
-        jpControlPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 160, 30));
-
-        jLabel3.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel3.setText("Membresia");
-        jpControlPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 140, 30));
-
-        jLabel38.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
-        jLabel38.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel38.setText("Residente");
-        jpControlPanel.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 160, 40));
-
-        jLabel4.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel4.setText("Vivienda");
-        jpControlPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 160, 40));
-
-        getContentPane().add(jpControlPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-150, 0, 200, 640));
-
-        jpNuevaFactura.setOpaque(false);
-        jpNuevaFactura.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel49.setFont(new java.awt.Font("Bodoni MT Black", 0, 48)); // NOI18N
-        jLabel49.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel49.setText("NUEVA FACTURA");
-        jpNuevaFactura.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, -1));
-
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jpNuevaFactura.add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 420, -1));
-
-        jLabel50.setText("Número de casa:");
-        jpNuevaFactura.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, -1));
-
-        jLabel53.setText("Dueño:");
-        jpNuevaFactura.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
-
-        jLabel57.setText("Descripción:");
-        jpNuevaFactura.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
-
-        jLabel58.setText("Monto($):");
-        jpNuevaFactura.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, -1, -1));
-
-        jLabel59.setText("Fecha:");
-        jpNuevaFactura.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, -1, -1));
-
-        jTextArea3.setColumns(20);
-        jTextArea3.setRows(5);
-        jScrollPane6.setViewportView(jTextArea3);
-
-        jpNuevaFactura.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, -1, -1));
-
-        jTextField15.setEnabled(false);
-        jpNuevaFactura.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 420, -1));
-
-        jTextField16.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        jTextField16.setText("0.00");
-        jTextField16.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField16KeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField16KeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField16KeyTyped(evt);
-            }
-        });
-        jpNuevaFactura.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, 140, -1));
-
-        jTextField17.setEnabled(false);
-        jpNuevaFactura.add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 140, -1));
-
-        jLabel60.setFont(new java.awt.Font("Bodoni MT", 1, 18)); // NOI18N
-        jLabel60.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel60.setText("AÑADIR FACTURA");
-        jLabel60.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel60MouseClicked(evt);
-            }
-        });
-        jpNuevaFactura.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 160, -1, -1));
-
-        getContentPane().add(jpNuevaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1200, 560));
+        jtxtValor.setBackground(new java.awt.Color(102, 102, 102));
+        jtxtValor.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        jtxtValor.setForeground(new java.awt.Color(255, 255, 255));
+        jtxtValor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
+        jpMembresia.add(jtxtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, 500, 40));
 
         jpVivienda.setOpaque(false);
         jpVivienda.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -623,78 +513,6 @@ public class Principal extends javax.swing.JFrame {
         jTextField11.setForeground(new java.awt.Color(255, 255, 255));
         jTextField11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
         jpVivienda.add(jTextField11, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 310, 30));
-
-        getContentPane().add(jpVivienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        jpRegistro.setOpaque(false);
-        jpRegistro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel41.setFont(new java.awt.Font("Bodoni MT Black", 0, 48)); // NOI18N
-        jLabel41.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel41.setText("REGISTRARSE");
-        jpRegistro.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, -1, 50));
-
-        jLabel42.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
-        jLabel42.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel42.setText("Nombre de usuario");
-        jpRegistro.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, -1, 50));
-
-        jLabel43.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
-        jLabel43.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel43.setText("Contraseña");
-        jpRegistro.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, 50));
-
-        jLabel44.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
-        jLabel44.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel44.setText("Rol");
-        jpRegistro.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, -1, 50));
-
-        jtxtNombreUsu.setBackground(new java.awt.Color(102, 102, 102));
-        jtxtNombreUsu.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
-        jtxtNombreUsu.setForeground(new java.awt.Color(255, 255, 255));
-        jtxtNombreUsu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
-        jpRegistro.add(jtxtNombreUsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 310, 30));
-
-        jtxtContrasena.setBackground(new java.awt.Color(51, 51, 51));
-        jtxtContrasena.setForeground(new java.awt.Color(255, 255, 255));
-        jtxtContrasena.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
-        jpRegistro.add(jtxtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, 310, 30));
-
-        jComboBox6.setBackground(new java.awt.Color(102, 102, 102));
-        jComboBox6.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
-        jComboBox6.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox6ItemStateChanged(evt);
-            }
-        });
-        jComboBox6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox6ActionPerformed(evt);
-            }
-        });
-        jpRegistro.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, 310, 30));
-
-        jbtnGuardarUsuario.setBackground(new java.awt.Color(51, 51, 51));
-        jbtnGuardarUsuario.setFont(new java.awt.Font("Bodoni MT Black", 1, 18)); // NOI18N
-        jbtnGuardarUsuario.setForeground(new java.awt.Color(110, 15, 27));
-        jbtnGuardarUsuario.setText("Registrar");
-        jbtnGuardarUsuario.setBorder(null);
-        jbtnGuardarUsuario.setContentAreaFilled(false);
-        jbtnGuardarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jbtnGuardarUsuarioMouseClicked(evt);
-            }
-        });
-        jbtnGuardarUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnGuardarUsuarioActionPerformed(evt);
-            }
-        });
-        jpRegistro.add(jbtnGuardarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 470, 190, 50));
-
-        getContentPane().add(jpRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jpRegistrar.setOpaque(false);
         jpRegistrar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -866,73 +684,6 @@ public class Principal extends javax.swing.JFrame {
         });
         jpRegistrar.add(jbtnConsultarVisitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 590, 190, 30));
 
-        getContentPane().add(jpRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 0, 1210, 640));
-
-        jpFactura.setOpaque(false);
-        jpFactura.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel21.setFont(new java.awt.Font("Bodoni MT Black", 0, 48)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel21.setText("FACTURACIÓN");
-        jpFactura.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, 50));
-
-        jTextField7.setBackground(new java.awt.Color(102, 102, 102));
-        jTextField7.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
-        jTextField7.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
-        jpFactura.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 510, 40));
-
-        jbtnBuscar.setBackground(new java.awt.Color(102, 102, 102));
-        jbtnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/lupa-para-buscar.png"))); // NOI18N
-        jbtnBuscar.setToolTipText("");
-        jbtnBuscar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
-        jbtnBuscar.setContentAreaFilled(false);
-        jbtnBuscar.setOpaque(true);
-        jpFactura.add(jbtnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 50, 40));
-
-        jbtnAñadir.setBackground(new java.awt.Color(102, 102, 102));
-        jbtnAñadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/anadir.png"))); // NOI18N
-        jbtnAñadir.setToolTipText("");
-        jbtnAñadir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
-        jbtnAñadir.setContentAreaFilled(false);
-        jbtnAñadir.setOpaque(true);
-        jbtnAñadir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jbtnAñadirMouseClicked(evt);
-            }
-        });
-        jpFactura.add(jbtnAñadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 50, 40));
-
-        jbtnModificar.setBackground(new java.awt.Color(102, 102, 102));
-        jbtnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/anadir-punto-de-anclaje.png"))); // NOI18N
-        jbtnModificar.setToolTipText("");
-        jbtnModificar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
-        jbtnModificar.setContentAreaFilled(false);
-        jbtnModificar.setOpaque(true);
-        jpFactura.add(jbtnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 120, 50, 40));
-
-        jScrollPane2.setBackground(new java.awt.Color(102, 102, 102));
-        jScrollPane2.setForeground(new java.awt.Color(255, 255, 255));
-
-        FacturasTable.setBackground(new java.awt.Color(102, 102, 102));
-        FacturasTable.setForeground(new java.awt.Color(255, 255, 255));
-        FacturasTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Correlativo", "Vivienda", "Dueño", "Mes"
-            }
-        ));
-        jScrollPane2.setViewportView(FacturasTable);
-
-        jpFactura.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 940, 320));
-
-        getContentPane().add(jpFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
         jpResidentes.setOpaque(false);
         jpResidentes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1101,61 +852,73 @@ public class Principal extends javax.swing.JFrame {
         jLabel48.setText("Nombre");
         jpResidentes.add(jLabel48, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, -1, 40));
 
-        getContentPane().add(jpResidentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jpRegistro.setOpaque(false);
+        jpRegistro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jpMembresia.setOpaque(false);
-        jpMembresia.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel41.setFont(new java.awt.Font("Bodoni MT Black", 0, 48)); // NOI18N
+        jLabel41.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel41.setText("REGISTRARSE");
+        jpRegistro.add(jLabel41, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, -1, 50));
 
-        jLabel22.setFont(new java.awt.Font("Bodoni MT Black", 0, 48)); // NOI18N
-        jLabel22.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel22.setText("MEMBRESIA");
-        jpMembresia.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, -1, 50));
+        jLabel42.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        jLabel42.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel42.setText("Nombre de usuario");
+        jpRegistro.add(jLabel42, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, -1, 50));
 
-        jLabel26.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel26.setText("Tipo de membresia");
-        jpMembresia.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, -1, 50));
+        jLabel43.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        jLabel43.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel43.setText("Contraseña");
+        jpRegistro.add(jLabel43, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, 50));
 
-        jLabel23.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel23.setText("Tipo");
-        jpMembresia.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, 50));
+        jLabel44.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        jLabel44.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel44.setText("Rol");
+        jpRegistro.add(jLabel44, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, -1, 50));
 
-        jLabel24.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel24.setText("Factor");
-        jpMembresia.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, -1, 50));
+        jtxtNombreUsu.setBackground(new java.awt.Color(102, 102, 102));
+        jtxtNombreUsu.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        jtxtNombreUsu.setForeground(new java.awt.Color(255, 255, 255));
+        jtxtNombreUsu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
+        jpRegistro.add(jtxtNombreUsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 130, 310, 30));
 
-        jLabel25.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
-        jLabel25.setForeground(new java.awt.Color(110, 15, 27));
-        jLabel25.setText("Valor");
-        jpMembresia.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, -1, 50));
+        jtxtContrasena.setBackground(new java.awt.Color(51, 51, 51));
+        jtxtContrasena.setForeground(new java.awt.Color(255, 255, 255));
+        jtxtContrasena.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
+        jpRegistro.add(jtxtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 200, 310, 30));
 
-        jtxtTipoMembresia.setBackground(new java.awt.Color(102, 102, 102));
-        jtxtTipoMembresia.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
-        jtxtTipoMembresia.setForeground(new java.awt.Color(255, 255, 255));
-        jtxtTipoMembresia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
-        jpMembresia.add(jtxtTipoMembresia, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 500, 40));
+        jComboBox6.setBackground(new java.awt.Color(102, 102, 102));
+        jComboBox6.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
+        jComboBox6.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox6ItemStateChanged(evt);
+            }
+        });
+        jComboBox6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox6ActionPerformed(evt);
+            }
+        });
+        jpRegistro.add(jComboBox6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, 310, 30));
 
-        jtxtTipo.setBackground(new java.awt.Color(102, 102, 102));
-        jtxtTipo.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
-        jtxtTipo.setForeground(new java.awt.Color(255, 255, 255));
-        jtxtTipo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
-        jpMembresia.add(jtxtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 500, 40));
-
-        jtxtFactor.setBackground(new java.awt.Color(102, 102, 102));
-        jtxtFactor.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
-        jtxtFactor.setForeground(new java.awt.Color(255, 255, 255));
-        jtxtFactor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
-        jpMembresia.add(jtxtFactor, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 500, 40));
-
-        jtxtValor.setBackground(new java.awt.Color(102, 102, 102));
-        jtxtValor.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
-        jtxtValor.setForeground(new java.awt.Color(255, 255, 255));
-        jtxtValor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
-        jpMembresia.add(jtxtValor, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, 500, 40));
-
-        getContentPane().add(jpMembresia, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jbtnGuardarUsuario.setBackground(new java.awt.Color(51, 51, 51));
+        jbtnGuardarUsuario.setFont(new java.awt.Font("Bodoni MT Black", 1, 18)); // NOI18N
+        jbtnGuardarUsuario.setForeground(new java.awt.Color(110, 15, 27));
+        jbtnGuardarUsuario.setText("Registrar");
+        jbtnGuardarUsuario.setBorder(null);
+        jbtnGuardarUsuario.setContentAreaFilled(false);
+        jbtnGuardarUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbtnGuardarUsuarioMouseClicked(evt);
+            }
+        });
+        jbtnGuardarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnGuardarUsuarioActionPerformed(evt);
+            }
+        });
+        jpRegistro.add(jbtnGuardarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 470, 190, 50));
 
         jpCroquis.setOpaque(false);
         jpCroquis.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1186,7 +949,277 @@ public class Principal extends javax.swing.JFrame {
         jLabel20.setText("CROQUIS DE RESIDENCIAL");
         jpCroquis.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, 50));
 
-        getContentPane().add(jpCroquis, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1000, 500));
+        setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jbtnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/minimizar (4).png"))); // NOI18N
+        jbtnMinimizar.setBorderPainted(false);
+        jbtnMinimizar.setContentAreaFilled(false);
+        jbtnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jbtnMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbtnMinimizarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbtnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 0, 40, 40));
+
+        jbtnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/boton-cerrar (1).png"))); // NOI18N
+        jbtnCerrar.setBorderPainted(false);
+        jbtnCerrar.setContentAreaFilled(false);
+        jbtnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jbtnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbtnCerrarMouseClicked(evt);
+            }
+        });
+        getContentPane().add(jbtnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 0, 40, 40));
+
+        jpControlPanel.setBackground(new java.awt.Color(153, 153, 153));
+        jpControlPanel.setPreferredSize(new java.awt.Dimension(190, 500));
+        jpControlPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jControlpanel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/menu (1).png"))); // NOI18N
+        jControlpanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jControlpanelMouseClicked(evt);
+            }
+        });
+        jpControlPanel.add(jControlpanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
+
+        jblRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/usuario (8).png"))); // NOI18N
+        jblRegistro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblRegistroMouseClicked(evt);
+            }
+        });
+        jpControlPanel.add(jblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 40, -1));
+
+        jblVisitas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/factura-aprobada.png"))); // NOI18N
+        jblVisitas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblVisitasMouseClicked(evt);
+            }
+        });
+        jpControlPanel.add(jblVisitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 40, 40));
+
+        jblCroquis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/mapa (1).png"))); // NOI18N
+        jblCroquis.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblCroquisMouseClicked(evt);
+            }
+        });
+        jpControlPanel.add(jblCroquis, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 40, 40));
+
+        jblFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/factura (1).png"))); // NOI18N
+        jblFactura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblFacturaMouseClicked(evt);
+            }
+        });
+        jpControlPanel.add(jblFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, 40, 50));
+
+        jblMembresia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/tarjeta-de-visita-de-un-hombre-con-informacion-de-contacto.png"))); // NOI18N
+        jblMembresia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblMembresiaMouseClicked(evt);
+            }
+        });
+        jpControlPanel.add(jblMembresia, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 240, 40, 40));
+
+        jblResidente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/grupo-de-usuarios.png"))); // NOI18N
+        jblResidente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblResidenteMouseClicked(evt);
+            }
+        });
+        jpControlPanel.add(jblResidente, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, 40, 40));
+
+        jblVivienda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/interfaz-de-hogar.png"))); // NOI18N
+        jblVivienda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jblViviendaMouseClicked(evt);
+            }
+        });
+        jpControlPanel.add(jblVivienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, 40, 40));
+
+        jLabel5.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel5.setText("Registrar visita");
+        jpControlPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 150, 40));
+
+        jLabel6.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel6.setText("Croquis");
+        jpControlPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 160, 40));
+
+        jLabel7.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel7.setText("Factura");
+        jpControlPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 160, 30));
+
+        jLabel3.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel3.setText("Membresia");
+        jpControlPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 140, 30));
+
+        jLabel38.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        jLabel38.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel38.setText("Residente");
+        jpControlPanel.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 160, 40));
+
+        jLabel4.setFont(new java.awt.Font("Bodoni MT Black", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel4.setText("Vivienda");
+        jpControlPanel.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 160, 40));
+
+        getContentPane().add(jpControlPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(-150, 0, 200, 640));
+
+        jpFactura.setOpaque(false);
+        jpFactura.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel21.setFont(new java.awt.Font("Bodoni MT Black", 0, 48)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel21.setText("FACTURACIÓN");
+        jpFactura.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, 50));
+
+        jTextField7.setBackground(new java.awt.Color(102, 102, 102));
+        jTextField7.setFont(new java.awt.Font("Bodoni MT Black", 0, 14)); // NOI18N
+        jTextField7.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
+        jpFactura.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 510, 40));
+
+        jbtnBuscar.setBackground(new java.awt.Color(102, 102, 102));
+        jbtnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/lupa-para-buscar.png"))); // NOI18N
+        jbtnBuscar.setToolTipText("");
+        jbtnBuscar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
+        jbtnBuscar.setContentAreaFilled(false);
+        jbtnBuscar.setOpaque(true);
+        jpFactura.add(jbtnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 50, 40));
+
+        jbtnAñadir.setBackground(new java.awt.Color(102, 102, 102));
+        jbtnAñadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/anadir.png"))); // NOI18N
+        jbtnAñadir.setToolTipText("");
+        jbtnAñadir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
+        jbtnAñadir.setContentAreaFilled(false);
+        jbtnAñadir.setOpaque(true);
+        jbtnAñadir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbtnAñadirMouseClicked(evt);
+            }
+        });
+        jpFactura.add(jbtnAñadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 120, 50, 40));
+
+        jbtnModificar.setBackground(new java.awt.Color(102, 102, 102));
+        jbtnModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Iconos/anadir-punto-de-anclaje.png"))); // NOI18N
+        jbtnModificar.setToolTipText("");
+        jbtnModificar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(110, 15, 27), 2));
+        jbtnModificar.setContentAreaFilled(false);
+        jbtnModificar.setOpaque(true);
+        jpFactura.add(jbtnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 120, 50, 40));
+
+        jScrollPane2.setBackground(new java.awt.Color(102, 102, 102));
+        jScrollPane2.setForeground(new java.awt.Color(255, 255, 255));
+
+        FacturasTable.setBackground(new java.awt.Color(102, 102, 102));
+        FacturasTable.setForeground(new java.awt.Color(255, 255, 255));
+        FacturasTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Correlativo", "Vivienda", "Dueño", "Mes"
+            }
+        ));
+        FacturasTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FacturasTableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(FacturasTable);
+
+        jpFactura.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 940, 320));
+
+        getContentPane().add(jpFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jpNuevaFactura.setOpaque(false);
+        jpNuevaFactura.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel49.setFont(new java.awt.Font("Bodoni MT Black", 0, 48)); // NOI18N
+        jLabel49.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel49.setText("NUEVA FACTURA");
+        jpNuevaFactura.add(jLabel49, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, -1));
+
+        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jpNuevaFactura.add(jComboBox7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 420, -1));
+
+        jLabel50.setText("Número de casa:");
+        jpNuevaFactura.add(jLabel50, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, -1));
+
+        jLabel53.setText("Dueño:");
+        jpNuevaFactura.add(jLabel53, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, -1));
+
+        jLabel57.setText("Descripción:");
+        jpNuevaFactura.add(jLabel57, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, -1, -1));
+
+        jLabel58.setText("Monto($):");
+        jpNuevaFactura.add(jLabel58, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, -1, -1));
+
+        jLabel59.setText("Fecha:");
+        jpNuevaFactura.add(jLabel59, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, -1, -1));
+
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jScrollPane6.setViewportView(jTextArea3);
+
+        jpNuevaFactura.add(jScrollPane6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, -1, -1));
+
+        jTextField15.setEnabled(false);
+        jpNuevaFactura.add(jTextField15, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 420, -1));
+
+        jTextField16.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextField16.setText("0.00");
+        jTextField16.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField16FocusLost(evt);
+            }
+        });
+        jTextField16.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField16KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField16KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField16KeyTyped(evt);
+            }
+        });
+        jpNuevaFactura.add(jTextField16, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 230, 140, -1));
+
+        jTextField17.setEnabled(false);
+        jpNuevaFactura.add(jTextField17, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 140, -1));
+
+        jLabel60.setFont(new java.awt.Font("Bodoni MT", 1, 18)); // NOI18N
+        jLabel60.setForeground(new java.awt.Color(110, 15, 27));
+        jLabel60.setText("AÑADIR FACTURA");
+        jLabel60.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel60MouseClicked(evt);
+            }
+        });
+        jpNuevaFactura.add(jLabel60, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 160, -1, -1));
+
+        getContentPane().add(jpNuevaFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1260, 650));
 
         jpFondo.setBackground(new java.awt.Color(255, 255, 255));
         jpFondo.setPreferredSize(new java.awt.Dimension(1098, 538));
@@ -1299,34 +1332,40 @@ public class Principal extends javax.swing.JFrame {
             
             
             
-            jcmbNueva.setModel(model);
+            jComboBox7.setModel(model);
             
             DALDueno daldueno = new DALDueno();
                     try {
                         
-                        Viviendas vn = vivienda.getViviendas(Integer.parseInt(jcmbNueva.getSelectedItem().toString())).get(0);
+                        Viviendas vn = vivienda.getViviendas(Integer.parseInt(jComboBox7.getSelectedItem().toString())).get(0);
                         Dueno dueno = daldueno.getDuenos(vn.getIdDueno()).get(0);
                         
                         
                         
-                        jtxtNomResidente.setText(dueno.getNombre()+ " " + dueno.getDUI());
+                        jTextField15.setText(dueno.getNombre()+ " " + dueno.getDUI());
                     } catch (SQLException ex) {
 //                        Logger.getLogger(.class.getName()).log(Level.SEVERE, null, ex);
                     }
             
             
-            jcmbNueva.addActionListener(new ActionListener(){
+            jComboBox7.addActionListener(new ActionListener(){
             
                 public void actionPerformed(ActionEvent e){
                     
                     DALDueno daldueno = new DALDueno();
                     try {
-                        Viviendas vn = vivienda.getViviendas(Integer.parseInt(jcmbNueva.getSelectedItem().toString())).get(0);
+                        Viviendas vn = vivienda.getViviendas(Integer.parseInt(jComboBox7.getSelectedItem().toString())).get(0);
                         Dueno dueno = daldueno.getDuenos(vn.getIdDueno()).get(0);
-                        jtxtNomResidente.setText(dueno.getNombre()+ " " + dueno.getDUI());
+                        jTextField15.setText(dueno.getNombre()+ " " + dueno.getDUI());
                     } catch (SQLException ex) {
 //                        Logger.getLogger(jpNuevaFactura.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    
+                    DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+         Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+String fechaParaSQL = df.format(date);
+
+jTextField17.setText(fechaParaSQL);
                     
                     
                     
@@ -1400,6 +1439,8 @@ public class Principal extends javax.swing.JFrame {
         jpResidentes.setVisible(false);
         jpVivienda.setVisible(true);
          jpRegistro.setVisible(false);
+         jpNuevaFactura.setVisible(false);
+         jpNueva.setVisible(false);
         
     }//GEN-LAST:event_jblViviendaMouseClicked
 
@@ -1414,6 +1455,8 @@ public class Principal extends javax.swing.JFrame {
         jpVivienda.setVisible(false);
          jpRegistro.setVisible(false);
          jpNueva.setVisible(false);
+         jpNuevaFactura.setVisible(false);
+         
     }//GEN-LAST:event_jblVisitasMouseClicked
 
     private void jblCroquisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblCroquisMouseClicked
@@ -1427,6 +1470,7 @@ public class Principal extends javax.swing.JFrame {
         jpVivienda.setVisible(false);
          jpRegistro.setVisible(false);
          jpNueva.setVisible(false);
+         jpNuevaFactura.setVisible(false);
     }//GEN-LAST:event_jblCroquisMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -1441,7 +1485,7 @@ public class Principal extends javax.swing.JFrame {
         jpVivienda.setVisible(false);
          jpRegistro.setVisible(false);
          jpNueva.setVisible(false);
-         
+         jpNuevaFactura.setVisible(false);
         jblVisitas.setVisible(false);
          
          
@@ -1450,6 +1494,7 @@ public class Principal extends javax.swing.JFrame {
     private void jblFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblFacturaMouseClicked
         // TODO add your handling code here:
         
+        llenarTabla();
         jpRegistrar.setVisible(false);
         jpCroquis.setVisible(false);
         jpFactura.setVisible(true);
@@ -1458,6 +1503,7 @@ public class Principal extends javax.swing.JFrame {
         jpVivienda.setVisible(false);
          jpRegistro.setVisible(false);
          jpNueva.setVisible(false);
+         jpNuevaFactura.setVisible(false);
     }//GEN-LAST:event_jblFacturaMouseClicked
 
     private void jblMembresiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblMembresiaMouseClicked
@@ -1471,6 +1517,7 @@ public class Principal extends javax.swing.JFrame {
         jpVivienda.setVisible(false);
          jpRegistro.setVisible(false);
          jpNueva.setVisible(false);
+         jpNuevaFactura.setVisible(false);
     }//GEN-LAST:event_jblMembresiaMouseClicked
 
     private void jblResidenteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jblResidenteMouseClicked
@@ -1484,6 +1531,7 @@ public class Principal extends javax.swing.JFrame {
         jpVivienda.setVisible(false);
          jpRegistro.setVisible(false);
          jpNueva.setVisible(false);
+         jpNuevaFactura.setVisible(false);
     }//GEN-LAST:event_jblResidenteMouseClicked
 
     private void jComboBox6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox6ActionPerformed
@@ -1500,6 +1548,7 @@ public class Principal extends javax.swing.JFrame {
         jpVivienda.setVisible(false);
         jpRegistro.setVisible(true);
         jpNueva.setVisible(false);
+        jpNuevaFactura.setVisible(false);
         
     }//GEN-LAST:event_jblRegistroMouseClicked
 
@@ -1517,7 +1566,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void jbtnAñadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtnAñadirMouseClicked
         // TODO add your handling code here:
-        jpNueva.setVisible(true);
+      IdRecibo = 0;
+        llenarComboBoxFacturas();
+        jpNuevaFactura.setVisible(true);
          jpRegistrar.setVisible(false);
         jpCroquis.setVisible(false);
         jpFactura.setVisible(false);
@@ -1525,6 +1576,7 @@ public class Principal extends javax.swing.JFrame {
         jpResidentes.setVisible(false);
         jpVivienda.setVisible(false);
         jpRegistro.setVisible(false);
+        jpNueva.setVisible(false);
         
     }//GEN-LAST:event_jbtnAñadirMouseClicked
 
@@ -1701,20 +1753,21 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnConsultarVisitasActionPerformed
 
     private void jTextField16KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField16KeyPressed
-        String valor = jTextField16.getText().trim();
-        char c = evt.getKeyChar();
-        if(c=='0' || c=='1' || c=='2' || c=='3' || c=='4' || c=='5' || c=='6' || c=='7' || c=='8' || c=='9' || c=='.'){
-            if(!jTextField16.getText().trim().contains(".") && c=='.'){
-
-            }
-
-        }
+        int c = evt.getKeyCode();
+        if(c!=8 && c!=127 && c!=37 && c!=38 && c!=39 && c!=40 ){
+        evt.consume();
+}
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField16KeyPressed
 
     private void jTextField16KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField16KeyReleased
         // TODO add your handling code here:
+        
+        int c = evt.getKeyCode();
+        if(jTextField16.getText().trim().equals("")){
+        jTextField16.setText("0.00");
+    }
     }//GEN-LAST:event_jTextField16KeyReleased
 
     private void jTextField16KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField16KeyTyped
@@ -1723,27 +1776,88 @@ public class Principal extends javax.swing.JFrame {
 
     private void jLabel60MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel60MouseClicked
         // TODO add your handling code here:
-
-//        if(!jTextArea3.getText().toString().trim().equals("")){
-//            if(ConfirmarIngreso("Desea Guardar la información", "Atención")){
-//
-//                DALRecibos dalRecibos = new DALRecibos();
-//                Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-//                try {
-//                    dalRecibos.SPInsertarRecibos(Integer.parseInt(jComboBox7.getSelectedItem().toString()), jTextArea3.getText().toString(), Double.parseDouble(jTextField16.getText()), date);
-//                    JOptionPane.showMessageDialog(null, "El registro se guardó correctamente");
-//                } catch (SQLException ex) {
-//                    JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
-//                    System.out.println(ex.toString());
-//                    // Logger.getLogger(PnDetFacturacion.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//
-//            }
-//        }else{
-//            jTextArea3.setText("");
-//            JOptionPane.showMessageDialog(null, "Ingresar un valor en campo descripción");
-//        }
+   
+        if(!jTextArea3.getText().toString().trim().equals("") && jTextArea3.getText().toString().trim().length()<=100){
+       if(ConfirmarIngreso("Desea Guardar la información", "Atención")){ 
+   
+        DALRecibos dalRecibos = new DALRecibos();
+        Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        try {
+             if(IdRecibo==0){
+            dalRecibos.SPInsertarRecibos(Integer.parseInt(jComboBox7.getSelectedItem().toString()), jTextArea3.getText().toString(), Double.parseDouble(jTextField16.getText()), date);
+            JOptionPane.showMessageDialog(null, "El registro se guardó correctamente");
+             }else{
+              dalRecibos.SPModificarRecibos(IdRecibo,jTextArea3.getText().toString(),Double.parseDouble(jTextField16.getText()));
+              JOptionPane.showMessageDialog(null, "El registro se actualizó correctamente");
+             }
+           
+        } catch (SQLException ex) {
+              JOptionPane.showMessageDialog(null, "Ha ocurrido un error");
+              System.out.println(ex.toString());
+           // Logger.getLogger(PnDetFacturacion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
+       }
+           }else{
+            jTextArea3.setText("");
+           JOptionPane.showMessageDialog(null, "Ingresar un valor en campo descripción y que sea menor o igual a 100 caracteres");
+        }
+   
     }//GEN-LAST:event_jLabel60MouseClicked
+
+    private void FacturasTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FacturasTableMouseClicked
+        // TODO add your handling code here:
+        
+        llenarComboBoxFacturas(); 
+        IdRecibo = (int) FacturasTable.getValueAt(FacturasTable.getSelectedRow(), 0);
+jLabel49.setText("Modificar CODIGO: "+IdRecibo);
+   jLabel60.setText("Modificar Factura");
+   jComboBox7.enable(false);
+        DALRecibos dalRecibos = new DALRecibos();
+DALPagos dalPagos = new DALPagos();
+Pagos pagos;
+Recibos recibo;
+DALVivienda dalVivienda = new DALVivienda();
+Viviendas vivienda;
+   DALDueno daldueno = new DALDueno();
+           try {
+               recibo = dalRecibos.getRecibos(IdRecibo).get(0);
+               pagos = dalPagos.getPagos(recibo.getIdRecibos()).get(0);
+
+               jComboBox7.setSelectedItem(pagos.getIdVivienda());
+                   Viviendas vn = dalVivienda.getViviendas(pagos.getIdVivienda()).get(0);
+                        Dueno dueno = daldueno.getDuenos(vn.getIdDueno()).get(0);
+                        jTextField15.setText(dueno.getNombre()+ " " + dueno.getDUI());
+                        jTextArea3.setText(recibo.getDescripcion());
+                        jTextField16.setText(String.format("%.2f", recibo.getMonto()).replace(",","."));
+               // TODO add your handling code here:
+           } catch (SQLException ex) {
+               Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+           }
+           
+ jpNueva.setVisible(false);
+        jpNuevaFactura.setVisible(true);
+         jpRegistrar.setVisible(false);
+        jpCroquis.setVisible(false);
+        jpFactura.setVisible(false);
+        jpMembresia.setVisible(false);
+        jpResidentes.setVisible(false);
+        jpVivienda.setVisible(false);
+        jpRegistro.setVisible(false);
+           
+    }//GEN-LAST:event_FacturasTableMouseClicked
+
+    private void jTextField16FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField16FocusLost
+        // TODO add your handling code here:
+        
+        double valor = Double.parseDouble(jTextField16.getText().trim());
+   if(valor>922337203685477.58)
+   jTextField16.setText("922337203685473.00");
+    if(jTextField16.getText().trim().equals("."))
+    jTextField16.setText("0.00");
+
+        jTextField16.setText(String.format("%.2f",Double.parseDouble(jTextField16.getText())).replace(",","."));
+    }//GEN-LAST:event_jTextField16FocusLost
 
     /**
      * @param args the command line arguments
